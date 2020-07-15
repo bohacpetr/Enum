@@ -71,7 +71,7 @@ class EnumTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public static function setUpBeforeClass() {
+    public static function setUpBeforeClass(): void {
         require __DIR__ . '/Test1Enum.php';
         require __DIR__ . '/Test2Enum.php';
     }

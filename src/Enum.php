@@ -62,7 +62,7 @@ abstract class Enum
     /**
      * Returns true if actual enum value is one of $values. False otherwise
      *
-     * @param mixed $values
+     * @param mixed[] $values
      * @return bool
      */
     public function equalsAny(array $values): bool
@@ -100,7 +100,7 @@ abstract class Enum
     }
 
     /**
-     * @param mixed
+     * @param mixed $value
      */
     private function set($value): void
     {
