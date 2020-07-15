@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace bohyn\Enum\fixtures;
 
+use bohyn\Enum\Enum;
+
 class Test2Enum extends Enum
 {
 

@@ -26,7 +26,7 @@ class EnumTest extends TestCase
     {
         $this->expectException(EnumException::class);
         $this->expectExceptionMessage(
-            "bohyn\\Enum\\Test1Enum: Unknown enumeration value '10'. Possible values: '1','2','3'"
+            "bohyn\\Enum\\fixtures\\Test1Enum: Unknown enumeration value '10'. Possible values: '1','2','3'"
         );
 
         new Test1Enum(self::INVALID_VALUE);
