@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace bohyn\Enum;
 
+use bohyn\Enum\fixtures\Test1Enum;
+use bohyn\Enum\fixtures\Test2Enum;
 use PHPStan\Testing\TestCase;
 
 class EnumTest extends TestCase
@@ -71,9 +73,9 @@ class EnumTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public static function setUpBeforeClass(): void {
-        require __DIR__ . '/Test1Enum.php';
-        require __DIR__ . '/Test2Enum.php';
+    public static function setUpBeforeClass(): void
+    {
+        require __DIR__ . '/fixtures/Test1Enum.php';
+        require __DIR__ . '/fixtures/Test2Enum.php';
     }
 }
-

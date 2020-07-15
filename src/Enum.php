@@ -23,29 +23,12 @@ abstract class Enum
         $this->set($value);
     }
 
-    public function __toString(): string
-    {
-        return (string)$this->value;
-    }
-
     /**
      * @return mixed
      */
     public function get()
     {
         return $this->value;
-    }
-
-    /**
-     * Get all valid values
-     *
-     * @return mixed[] [CONSTANT_NAME => value]
-     */
-    public static function getValidValues(): array
-    {
-        self::getConstList();
-
-        return self::$constList[get_called_class()];
     }
 
     /**
@@ -88,15 +71,16 @@ abstract class Enum
         return in_array($value, static::$constList[get_called_class()], true);
     }
 
-    private static function getConstList(): void
+    /**
+     * Get all valid values
+     *
+     * @return mixed[] [CONSTANT_NAME => value]
+     */
+    public static function getValidValues(): array
     {
-        if (array_key_exists(get_called_class(), static::$constList)) {
-            return;
-        }
+        self::getConstList();
 
-        $reflection = new ReflectionClass(get_called_class());
-        $constList = array_values($reflection->getConstants());
-        static::$constList[get_called_class()] = $constList;
+        return self::$constList[get_called_class()];
     }
 
     /**
@@ -122,5 +106,21 @@ abstract class Enum
                 implode("','", static::$constList[get_called_class()])
             )
         );
+    }
+
+    private static function getConstList(): void
+    {
+        if (array_key_exists(get_called_class(), static::$constList)) {
+            return;
+        }
+
+        $reflection = new ReflectionClass(get_called_class());
+        $constList = array_values($reflection->getConstants());
+        static::$constList[get_called_class()] = $constList;
+    }
+
+    public function __toString(): string
+    {
+        return (string)$this->value;
     }
 }

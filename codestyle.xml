@@ -51,9 +51,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="src" value="bohyn\PgSql"/>
-				<element key="tests/unit" value="bohyn\PgSql"/>
-				<element key="tests/integration" value="bohyn\PgSql"/>
+				<element key="src" value="bohyn\Enum"/>
+				<element key="tests/unit" value="bohyn\Enum"/>
 			</property>
 			<property name="skipDirs" type="array">
 				<!--<element value="new"/>-->
