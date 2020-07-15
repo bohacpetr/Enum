@@ -68,7 +68,7 @@ abstract class Enum
     {
         self::getConstList();
 
-        return in_array($value, static::$constList[get_called_class()], true);
+        return in_array($value, static::$constList[static::class], true);
     }
 
     /**
@@ -80,7 +80,7 @@ abstract class Enum
     {
         self::getConstList();
 
-        return self::$constList[get_called_class()];
+        return self::$constList[static::class];
     }
 
     /**
@@ -101,22 +101,22 @@ abstract class Enum
         throw new EnumException(
             sprintf(
                 "%s: Unknown enumeration value '%s'. Possible values: '%s'",
-                get_called_class(),
+                static::class,
                 var_export($value, true),
-                implode("','", static::$constList[get_called_class()])
+                implode("','", static::$constList[static::class])
             )
         );
     }
 
     private static function getConstList(): void
     {
-        if (array_key_exists(get_called_class(), static::$constList)) {
+        if (array_key_exists(static::class, static::$constList)) {
             return;
         }
 
-        $reflection = new ReflectionClass(get_called_class());
+        $reflection = new ReflectionClass(static::class);
         $constList = array_values($reflection->getConstants());
-        static::$constList[get_called_class()] = $constList;
+        static::$constList[static::class] = $constList;
     }
 
     public function __toString(): string
