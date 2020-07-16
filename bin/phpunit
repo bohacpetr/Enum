@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd $( realpath $( dirname $0 )/.. )
-tests="tests/unit tests/integration"
+tests="tests/unit"
 
 if [ $# -gt 0 ];
 then
