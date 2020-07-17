@@ -92,20 +92,16 @@ abstract class Enum
             $value = $value->get();
         }
 
-        if (static::isValid($value)) {
-            $this->value = $value;
+        if (!static::isValid($value)) {
+            $input = var_export($value, true);
+            $possibleValues = implode("','", static::$constList[static::class]);
 
-            return;
+            throw new EnumException(
+                sprintf("Unknown enumeration value '%s'. Possible values: '%s'", $input, $possibleValues)
+            );
         }
 
-        throw new EnumException(
-            sprintf(
-                "%s: Unknown enumeration value '%s'. Possible values: '%s'",
-                static::class,
-                var_export($value, true),
-                implode("','", static::$constList[static::class])
-            )
-        );
+        $this->value = $value;
     }
 
     private static function getConstList(): void

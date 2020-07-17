@@ -6,6 +6,9 @@ namespace bohyn\Enum;
 
 use Iterator;
 
+/**
+ * @implements Iterator<int, mixed>
+ */
 abstract class MultiEnum extends Enum implements Iterator
 {
 
@@ -74,11 +77,12 @@ abstract class MultiEnum extends Enum implements Iterator
     }
 
     /**
-     * @param mixed[] $values
+     * @param mixed $values
      * @return bool
      */
     public static function isValid($values): bool
     {
+        $values = is_array($values) ? $values : [$values];
         sort($values);
 
         return $values === array_intersect($values, self::$constList[static::class]);

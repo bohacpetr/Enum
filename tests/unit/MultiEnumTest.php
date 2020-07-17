@@ -29,9 +29,11 @@ class MultiEnumTest extends TestCase
     public function testInvalidValue(): void
     {
         $this->expectException(EnumException::class);
-        $this->expectExceptionMessage("bohyn\\Enum\\fixtures\\Test1MultiEnum: Unknown enumeration value 'array (
+        $this->expectExceptionMessage(
+            "Unknown enumeration value 'array (
   0 => 10,
-)'. Possible values: '1','2','3'");
+)'. Possible values: '1','2','3'"
+        );
 
         new Test1MultiEnum(self::INVALID_VALUE_1);
     }
@@ -39,10 +41,12 @@ class MultiEnumTest extends TestCase
     public function testInvalidValueArray(): void
     {
         $this->expectException(EnumException::class);
-        $this->expectExceptionMessage("bohyn\\Enum\\fixtures\\Test1MultiEnum: Unknown enumeration value 'array (
+        $this->expectExceptionMessage(
+            "Unknown enumeration value 'array (
   0 => 10,
   1 => 11,
-)'. Possible values: '1','2','3'");
+)'. Possible values: '1','2','3'"
+        );
 
         new Test1MultiEnum([self::INVALID_VALUE_1, self::INVALID_VALUE_2]);
     }
@@ -50,10 +54,12 @@ class MultiEnumTest extends TestCase
     public function testPartlyIvalidArray(): void
     {
         $this->expectException(EnumException::class);
-        $this->expectExceptionMessage("bohyn\\Enum\\fixtures\\Test1MultiEnum: Unknown enumeration value 'array (
+        $this->expectExceptionMessage(
+            "Unknown enumeration value 'array (
   0 => 1,
   1 => 10,
-)'. Possible values: '1','2','3'");
+)'. Possible values: '1','2','3'"
+        );
 
         new Test1MultiEnum([Test1MultiEnum::A, 10]);
     }
@@ -79,5 +85,27 @@ class MultiEnumTest extends TestCase
         $this->assertTrue($enum->equals([Test1MultiEnum::C, Test1MultiEnum::A]));
         $this->assertTrue($enum->equals([Test1MultiEnum::A, Test1MultiEnum::C]));
         $this->assertTrue($enum->equals($enum));
+    }
+
+    public function testIterator(): void
+    {
+        $enum = new Test1MultiEnum([Test1MultiEnum::A, Test1MultiEnum::B]);
+        $expectedValues = [Test1MultiEnum::A, Test1MultiEnum::B];
+        $expectedKeys = [0, 1];
+        $values = $keys = [];
+
+        foreach ($enum as $key => $value) {
+            $values[] = $value;
+            $keys[] = $key;
+        }
+
+        $this->assertEquals($expectedValues, $values);
+        $this->assertEquals($expectedKeys, $keys);
+    }
+
+    public function testToString(): void
+    {
+        $enum = new Test1MultiEnum([Test1MultiEnum::A, Test1MultiEnum::B]);
+        $this->assertEquals('1,2', (string)$enum);
     }
 }

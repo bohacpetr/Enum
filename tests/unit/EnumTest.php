@@ -20,13 +20,22 @@ class EnumTest extends TestCase
 
         $test2 = new Test2Enum(Test2Enum::Z);
         $this->assertEquals(Test2Enum::Z, $test2->get());
+
+        $test3 = new Test1Enum(new Test1Enum(Test1Enum::B));
+        $this->assertEquals(Test1Enum::B, $test3->get());
+    }
+
+    public function testToString(): void
+    {
+        $enum = new Test1Enum(Test1Enum::A);
+        $this->assertEquals((string)Test1Enum::A, (string)$enum);
     }
 
     public function testInvalidValue(): void
     {
         $this->expectException(EnumException::class);
         $this->expectExceptionMessage(
-            "bohyn\\Enum\\fixtures\\Test1Enum: Unknown enumeration value '10'. Possible values: '1','2','3'"
+            "Unknown enumeration value '10'. Possible values: '1','2','3'"
         );
 
         new Test1Enum(self::INVALID_VALUE);
