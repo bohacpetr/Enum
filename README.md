@@ -1,4 +1,5 @@
-#Enum
+Enum
+====
 
 ```php
 use bohyn\Enum\Enum;
@@ -36,7 +37,8 @@ MyEnum::isValid(1); // true
 MyEnum::isValid(5); // false
 ```
 
-#MultiEnum
+MultiEnum
+=========
 
 ```php
 use bohyn\Enum\MultiEnum;
